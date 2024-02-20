@@ -1,0 +1,8 @@
+{
+  "name": "PlazaLibre",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "4830c15e"
+}
