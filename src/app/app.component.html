@@ -1,3 +1,39 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay" [disabled]="!isMenuEnabled">
+      <ion-content>
+        <div class="main-list">
+          <ion-list id="inbox-list">
+
+            <ion-menu-toggle auto-hide="false">
+              <ion-item lines="none" (click)="navigate('/home', 1)" detail="false" class="ion-text-center" [class.selected]="selectedIndex === 1">
+                <ion-label>Inicio</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle auto-hide="false">
+              <ion-item lines="none" (click)="navigate('/all-products', 2)" detail="false" class="ion-text-center" [class.selected]="selectedIndex === 5">
+                <ion-label>Productos</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle auto-hide="false">
+              <ion-item lines="none" (click)="navigate('/my-cart', 3)" detail="false" class="ion-text-center" [class.selected]="selectedIndex === 3">
+                <ion-label>Mi carrito</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle auto-hide="false">
+              <ion-item lines="none" (click)="navigate('/profile', 4)" detail="false" class="ion-text-center" [class.selected]="selectedIndex === 2">
+                <ion-label>Perfíl</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+
+          <!-- Close Button -->
+          <ion-button fill="clear" color="dark" (click)="close()">
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>
