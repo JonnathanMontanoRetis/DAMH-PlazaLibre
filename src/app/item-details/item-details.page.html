@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" class="backbtn" routerLink="{{routerPath}}" routerDirection="back">
+        <img src="../../assets/back-dark.svg" />
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="search-outline" color="dark"></ion-icon>
+      </ion-button>
+      <ion-button class="notification">
+        <ion-icon name="notifications-outline" color="dark"></ion-icon>
+        <span>&nbsp;</span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <div class="img-header">
+    <img src="{{product?.image}}" />
+  </div>
+      
+  <div class="ion-padding-vertical">
+    <h1 class="item-name">{{product?.name}}</h1>
+
+    <h4 class="price">
+      {{formatPrice(product?.price!)}}
+    </h4>
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+  <div class="description">
+    <h5>Descripción</h5>
+
+    <p>
+      {{product?.description}}
+    </p>
+
+  </div>
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+</ion-content>
+<ion-footer>
+    <ion-button expand="block" class="main-button" (click)="addProductToCart(this.product!)">Agregar al carrito</ion-button>
+</ion-footer>

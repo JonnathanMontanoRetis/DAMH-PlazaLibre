@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-buttons class="backbtn" routerLink="{{routerPath}}" routerDirection="back">
+        <img src="../../assets/back-dark.svg" />
+      </ion-buttons>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <h1 class="title">Carrito</h1>
+
+  <div class="cart-items" *ngFor="let cartProduct of productsInCart">
+    <ion-card mode="ios">
+      <div class="remove" (click)="removeProductInCart(cartProduct.product)">
+          <ion-icon name="trash-outline" color="dark" class="icon-cart"></ion-icon>
+      </div>
+      <ion-card-content>
+        <div class="item-img">
+          <img src="{{cartProduct.product.image}}" />
+        </div>
+
+        <div class="item-info">
+          <p>{{cartProduct.product.name}}</p>
+          <p>{{cartProduct.product.brand}}</p>
+          <p>{{formatPrice(cartProduct.product.price)}}</p>
+
+          <div class="qty-selector">
+            <ion-button fill="clear" (click)="removeCatnProduct(cartProduct.product)">-</ion-button>
+            <ion-label>{{cartProduct.cant}}</ion-label>
+            <ion-button fill="clear" (click)="addCantProduct(cartProduct.product)">+</ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+<ion-footer translucent="true" class="ion-no-border" mode="md">
+  <ion-toolbar color="translucent">
+    <ion-button expand="block" class="main-button" routerLink="/checkout" routerDirection="forward">Continuar</ion-button>
+  </ion-toolbar>
+</ion-footer>

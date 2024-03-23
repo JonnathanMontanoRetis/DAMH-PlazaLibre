@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-buttons class="backbtn" routerLink="/my-cart" routerDirection="back">
+        <img src="../../assets/back-dark.svg" />
+      </ion-buttons>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <h1 class="title">Resumen del pedido</h1>
+
+  <div class="cart-items" *ngFor="let cartProduct of productsInCart">
+    
+    <ion-card mode="ios">
+      <ion-card-content>
+        <div class="item-img">
+          <img src="{{cartProduct.product.image}}" />
+        </div>
+
+        <div class="item-info">
+          <p>{{cartProduct.product.name}}</p>
+          <p>{{cartProduct.product.brand}}</p>
+          <p>{{formatPrice(cartProduct.product.price)}}</p>
+
+          <div class="qty-selector">
+            <ion-label>{{cartProduct.cant}}</ion-label>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    
+  </div>
+
+  <div class="address">
+    <ion-item lines="none">
+      Avenida (Calle) 32 No. 17 – 30, Bogotá D.C., Colombia
+    </ion-item>
+  </div>
+
+  <hr>
+
+  <div class="cart-total">
+    <ion-item lines="none">
+      <ion-label>Sub Total</ion-label>
+      <ion-label slot="end" class="ion-text-right">{{formatPrice(subTotal!)}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Envío</ion-label>
+      <ion-label slot="end" class="ion-text-right">$ 5.000</ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>Total</ion-label>
+      <ion-label slot="end" class="ion-text-right">{{obtenerTotal()}}</ion-label>
+    </ion-item>
+  </div>
+</ion-content>
+<ion-footer translucent="true" class="ion-no-border" mode="md">
+  <ion-toolbar color="translucent">
+    <ion-button id="present-alert" expand="block" class="main-button" (click)="presentAlert()">Pagar</ion-button>
+  </ion-toolbar>
+</ion-footer>
