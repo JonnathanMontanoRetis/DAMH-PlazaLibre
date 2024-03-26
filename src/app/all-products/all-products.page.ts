@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { IProduct, ProductosService } from '../services/productos/productos.services';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { DataService } from '../data.service';
+import { CartService } from '../services/cart/cart.services';
+import { LoadingController } from '@ionic/angular';
 
 const formatter = new Intl.NumberFormat('es-CO', {
   style: 'currency',
@@ -17,14 +21,32 @@ const formatter = new Intl.NumberFormat('es-CO', {
 export class AllProductsPage implements OnInit {
 
   public products: IProduct[] = [];
+  cartHasProdcuts: Observable<number> | undefined;
+
+  @ViewChildren('allProducts') listProduct: QueryList<any> | undefined;
 
   constructor(
     private productsServices: ProductosService,
-    private router: Router
+    private router: Router,
+    private dataService: DataService,
+    private cartService: CartService,
+    private loadingCtrl: LoadingController,
   ) { }
 
+  loading = this.loadingCtrl.create({
+    spinner: 'circular'
+  });
+
   async ngOnInit(): Promise<void> {
+    (await this.loading).isOpen = true;
     this.products = await this.productsServices.getAllProducts(); //Carga de todos los productos
+    this.cartHasProdcuts = this.dataService.cantProductsInCart$;
+  }
+
+  ngAfterViewInit() {
+    this.listProduct?.changes.subscribe(async p => {
+      (await this.loading).isOpen = false;
+    })
   }
 
    /**
@@ -44,4 +66,19 @@ export class AllProductsPage implements OnInit {
     this.router.navigate(['/item-details'], {queryParams: {response: product, path: "/all-products" }});
   }
 
+  /**
+   * Función que dirige al carrito de compras
+   */
+  goToCart() {
+    this.router.navigate(['/my-cart'], {queryParams: {path: "/home" }});
+  }
+
+  /**
+   * Función que agrega el producto seleccionado al carrito de compras
+   * @param product Producto a agregar
+   */
+  addProductToCart(product: IProduct) {
+    this.cartService.addItem(product);
+    this.cartHasProdcuts = this.dataService.updateCantInCart(this.cartService.hasProducts());
+  }
 }

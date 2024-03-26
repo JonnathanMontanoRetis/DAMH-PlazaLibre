@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { LoadingController } from "@ionic/angular";
 
 // Product Interface
 export interface IProduct {
@@ -48,7 +49,7 @@ export class ProductosService {
 
                     products.push(product);
                 });
-            });
+            });   
       } catch (error) {
         console.log(error);
       }

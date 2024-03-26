@@ -7,8 +7,9 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button class="notification">
-        <ion-icon name="notifications-outline" color="dark"></ion-icon>
+      <ion-button class="notification" (click)="goToCart()">
+        <ion-icon name="cart-outline" color="dark" class="icon-cart"></ion-icon>
+        <span>{{cartHasProdcuts | async}}</span>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -17,10 +18,10 @@
 <ion-content>
   <h1 class="title">Productos</h1>
 
-  <div class="order-items" *ngFor="let product of products">
-    <ion-card mode="ios" (click)="viewDetails(product)" tappable *ngIf="(product.price > 0)">
+  <div #allProducts class="order-items" *ngFor="let product of products">
+    <ion-card mode="ios" *ngIf="(product.price > 0)">
       <ion-card-content>
-        <div class="item-img">
+        <div class="item-img" (click)="viewDetails(product)" tappable>
           <img src='{{product.image}}' />
         </div>
 
@@ -29,7 +30,7 @@
           <p>{{product.brand}}</p>
           <p>{{formatPrice(product.price)}}</p>
 
-          <ion-button expand="block" class="main-button">Agregar al carrito</ion-button>
+          <ion-button expand="block" class="main-button" (click)="addProductToCart(product)">Agregar al carrito</ion-button>
         </div>
       </ion-card-content>
     </ion-card>

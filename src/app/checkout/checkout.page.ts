@@ -59,6 +59,11 @@ export class CheckoutPage implements OnInit {
    * Función encargada de solicitar el metodo de pago e invocar el proceso de pago
    */
   async presentAlert() {
+
+    const loading = this.loadingCtrl.create({
+      spinner: 'circular'
+    });
+
     const alert = await this.alertController.create({
       header: 'MEDIO DE PAGO',      
       inputs: [
@@ -99,10 +104,22 @@ export class CheckoutPage implements OnInit {
               });
               notification.present();
             } else {
-              await this.paymentServices.sendPayment(this.metodoPago, this.total!).subscribe((response) => {
+              await this.paymentServices.sendPayment(this.metodoPago, this.total!).subscribe(async response => {
+                (await loading).isOpen = true;
                 const keys = Object.values(response);
-                this.loadingPayment(keys[1]);
+                this.loadingPayment(keys[1], loading);
+              },
+              async error => {
+                (await loading).isOpen = false;
+                console.log(error['message']);
+                const alerError = this.alertController.create({
+                  header: 'Error',
+                  message: error['message']
+                });
+                (await alerError).present();
               });
+
+              (await loading).isOpen = false;
             }
           } 
         },
@@ -119,19 +136,11 @@ export class CheckoutPage implements OnInit {
    * Función que presenta una animación de carga mientras se realiza el proceso de pago
    * @param response Animación de carga
    */
-  async loadingPayment(response: string) {
-    const loading = this.loadingCtrl.create({
-      spinner: 'circular'
-    });
-    (await loading).isOpen = true;
-
+  async loadingPayment(response: string, loading: any) {
     window.setTimeout(async () => {
-      console.log('Finish');
-
-      (await (loading)).isOpen = false;
-
       if(response === 'Transaction is successful.') {
         this.router.navigate(['/confirm']);
+        (await loading).isOpen = false;
       }
     }, 2000);
   }

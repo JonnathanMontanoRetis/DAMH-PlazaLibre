@@ -58,7 +58,7 @@
 }
 
 .main-button {
-    --background: linear-gradient(90deg, rgba(102,126, 234, 1) 0%, rgba(100, 182, 255, 1) 100%);
+    --background: linear-gradient(90deg, rgb(0, 161, 86) 0%, rgba(10, 161, 86) 100%);
     --box-shadow: none;
     position: relative;
     height: 50px;
@@ -74,7 +74,7 @@
     top: 10px;
     height: 40px;
     z-index: -1;
-    box-shadow: 0px 20px 20px -17px rgba(0, 111, 255, 1);
+    box-shadow: 0px 20px 20px -17px rgb(65, 121, 95);
 }
 
 // Removing ion-button focus outline
@@ -98,7 +98,7 @@ ion-toolbar {
 .notification {
     span {
         text-align: center;
-        background-color: #6682eb;
+        background-color: rgb(0, 161, 86);
         border-radius: 50%;
         width: 20px;
         height: 20px;

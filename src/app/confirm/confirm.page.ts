@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../services/cart/cart.services';
+import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-confirm',
@@ -6,10 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./confirm.page.scss'],
 })
 export class ConfirmPage implements OnInit {
-  cartService: any;
-  router: any;
-
-  constructor() { }
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
     console.log("Init confirm");
@@ -20,6 +24,7 @@ export class ConfirmPage implements OnInit {
    */
   regresarInicio() {
     this.cartService.resetCart();
+    this.dataService.updateCantInCart(this.cartService.hasProducts());
     this.router.navigate(['/home']);
   }
 
