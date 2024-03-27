@@ -115,7 +115,7 @@ ion-content {
 }
 
 .wrapper {
-  height: auto;
+  height: 70%;
   background: #FDFEFF;
 	transition: background .6s ease;
 	border-radius: 10px;
@@ -201,6 +201,15 @@ ion-content {
 			margin-bottom: 1.3em;
 		}
 		
+		.credit-card {
+			width: 100%;
+		}
+
+		.number-card {
+			text-align: center;
+			font-size: xx-large;
+		}
+
 		.btn {
 			color: #fff;
 			width: 130px;
@@ -260,7 +269,7 @@ ion-content {
 			
 			h4 {
 				color: #080911;
-				font-size: 1em;
+				font-size: 22px;
 				margin-top: 1.3em;
 				margin-bottom: .2em;
 			}
@@ -270,6 +279,78 @@ ion-content {
 				font-size: 12px;
                 text-align: center;		
 			}
+		}
+	}
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000px;
+}
+	/* flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	height: 550px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+
+	.icon {
+		font-size: 50px;
+		float: right;
+	}
+}
+
+/* back, initially hidden pane */
+.back {
+	height: 100%;
+	width: 100%;
+	background-color: white;
+	transform: rotateY(180deg);
+
+	.icon {
+		font-size: 50px;
+		float: right;
+	}
+}
+
+.flip-container:hover .flipper, .flip-container.hover .flipper, .flip-container.flip .flipper {
+	transform: rotateY(180deg);
+}
+
+.hover {
+	.front {
+		transform: rotateY(180deg);
+	}
+	
+	.back {
+		transform: rotateY(0deg);
+		.icon {
+			transform: rotateY(0deg);
 		}
 	}
 }
