@@ -39,7 +39,7 @@ export class AllProductsPage implements OnInit {
 
   async ngOnInit(): Promise<void> {
     (await this.loading).isOpen = true;
-    this.products = await this.productsServices.getAllProducts(); //Carga de todos los productos
+    this.products = await this.productsServices.getProductsBySection("getByCompany"); //Carga de todos los productos
     this.cartHasProdcuts = this.dataService.cantProductsInCart$;
   }
 

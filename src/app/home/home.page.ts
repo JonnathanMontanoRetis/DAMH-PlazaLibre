@@ -36,8 +36,8 @@ export class HomePage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.featuredProducts = await this.productsServices.getTopProducts(); //Carga de los productos más vendidos
-    this.bestSellProducts = await this.productsServices.getRecommendedProducts(); //Carga de los productos recomendados
+    this.featuredProducts = await this.productsServices.getProductsBySection("getTop"); //Carga de los productos más vendidos
+    this.bestSellProducts = await this.productsServices.getProductsBySection("getRecommended"); //Carga de los productos recomendados
     this.cartHasProdcuts = this.dataService.cantProductsInCart$; //Carga de la cantidad de unidades en el carrito de compras
   }
 
