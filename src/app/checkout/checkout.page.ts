@@ -104,6 +104,7 @@ export class CheckoutPage implements OnInit {
               });
               notification.present();
             } else {
+              // Invocar la pasarela de pago para enviarle lo datos de metodo de pago y el valor a pagar
               await this.paymentServices.sendPayment(this.metodoPago, this.total!).subscribe(async response => {
                 (await loading).isOpen = true;
                 const keys = Object.values(response);

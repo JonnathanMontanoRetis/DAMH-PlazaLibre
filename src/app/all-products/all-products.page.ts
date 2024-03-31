@@ -70,7 +70,7 @@ export class AllProductsPage implements OnInit {
    * Función que dirige al carrito de compras
    */
   goToCart() {
-    this.router.navigate(['/my-cart'], {queryParams: {path: "/home" }});
+    this.router.navigate(['/my-cart'], {queryParams: {path: "/all-products" }});
   }
 
   /**
