@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CategoriasService, ICategory } from '../services/categorias/categorias.services';
 
 import { register } from 'swiper/element/bundle';
 import { ProductosService, IProduct } from '../services/productos/productos.services';
@@ -23,7 +22,6 @@ const formatter = new Intl.NumberFormat('es-CO', {
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  public categories: ICategory[] = [];
   public featuredProducts: IProduct[] = [];
   public bestSellProducts: IProduct[] = [];
   public cartHasProdcuts: Observable<number> | undefined;

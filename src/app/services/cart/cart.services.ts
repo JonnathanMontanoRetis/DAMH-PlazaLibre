@@ -46,7 +46,7 @@ export class CartService {
  }
 
  /**
-  * Funcuón para eliminar un producto del carrito de compras
+  * Función para eliminar un producto del carrito de compras
   * @param product Producto a eliminar del carrito de compras
   */
  removeItem(product: IProduct) {
